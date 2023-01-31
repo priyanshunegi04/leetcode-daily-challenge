@@ -1,0 +1,11 @@
+   bool judgeSquareSum(int c) {
+     
+      long long start = 0, end = sqrt(c);   
+      while(start <= end){
+          long long temp =  (start*start) + (end*end); 
+          if(temp == c)return true;
+          else if(temp < c)start++;
+          else end--;
+      }
+        return false;
+    }
