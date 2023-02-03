@@ -1,0 +1,19 @@
+   int getPivot(vector<int>&nums, int n){
+        int s= 0;
+        int e = n-1;
+        while(s<e){
+         int mid = s+(e-s)/ 2;
+         if(nums[mid] > nums[n-1]){
+             s = mid+1;
+         }
+         else{
+           e = mid;  
+         } 
+     }   
+    return nums[s];
+    }
+    int findMin(vector<int>& nums) {
+        int n = nums.size();
+        int pivot = getPivot(nums, n);
+        return pivot;    
+    }
