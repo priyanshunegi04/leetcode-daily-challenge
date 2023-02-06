@@ -1,0 +1,19 @@
+    string removeOuterParentheses(string s) {
+        string res = "";
+        stack<char>st;
+        for(auto c : s){
+            if(c == '('){
+                if(st.size()>0){
+                    res = res +c;
+                }
+                st.push(c);
+            }    
+            else{
+                 if(st.size()>1){
+                    res = res +c;
+                }
+                st.pop();
+            }
+        }
+     return res;
+    }
