@@ -1,0 +1,19 @@
+  
+    //Brute force;;;
+    int beautySum(string s) {
+        int n = s.length();
+        int ans = 0;
+        for(int i=0; i<n; i++){
+            map<char, int>m;
+            for(int j=i; j<n; j++){
+               m[s[j]]++;    
+               int m_freq = 0, l_freq =  INT_MAX;
+                for(auto it:m){
+                    m_freq = max(m_freq, it.second);
+                    l_freq = min(l_freq, it.second);
+                }
+                ans += m_freq - l_freq;
+            }    
+        }
+        return ans;
+    }
