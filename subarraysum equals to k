@@ -1,0 +1,18 @@
+   int subarraySum(vector<int>& nums, int k) {
+        int n = nums.size();
+        int cnt = 0;
+        int sum = 0;
+        map<int, int>prevsum;
+        for(int i=0; i<n; i++){
+            sum += nums[i];
+            
+            if(sum==k)cnt++;
+            
+            if(prevsum.find(sum-k) != prevsum.end()){
+                cnt += prevsum[sum-k];
+            }
+           
+            prevsum[sum]++;
+        }
+        return cnt;
+    }
