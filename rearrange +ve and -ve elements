@@ -1,0 +1,29 @@
+
+	void rearrange(int arr[], int n) {
+	    // code here
+	    	 int pos[n] , neg[n];
+	 int pos_cnt = 0, neg_cnt = 0;
+	 
+	 for(int i=0; i<n; i++){
+	     if(arr[i] >=0){
+	         pos[pos_cnt++] = arr[i];
+	     }
+	     else {
+	         neg[neg_cnt++] = arr[i];
+	     }
+	 }
+	 
+	 int i=0, j=0,k=0;
+	 while(i<pos_cnt && j<neg_cnt){
+	     arr[k++] = pos[i++];
+	     arr[k++] = neg[j++];
+	 }
+	 
+	 while(i<pos_cnt){
+	     arr[k++] = pos[i++];
+	 }
+	 
+	 while(j<neg_cnt){
+	     arr[k++] = neg[j++];
+	 }
+	}
