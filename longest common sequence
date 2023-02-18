@@ -1,0 +1,18 @@
+ int longestConsecutive(vector<int>& nums) {
+      int n = nums.size(); // extract the size of array
+        if(n == 0) return 0; 
+        sort(nums.begin(), nums.end());
+        int cnt = 1, mxlen = 0;
+        for(int i=1; i<nums.size(); i++){
+            if(nums[i-1]+1 == nums[i]){
+                cnt++;
+            }
+            else if(nums[i-1]+1 != nums[i]){
+                mxlen = max(mxlen, cnt);
+                cnt = 1;
+            }
+        }
+        mxlen = max(mxlen, cnt);
+        
+        return mxlen;
+    }
