@@ -1,0 +1,43 @@
+ int lambai(ListNode* head){
+        
+     ListNode* temp = head;   
+     int cnt = 0;   
+     while(temp!=NULL){
+         
+         temp = temp->next;
+         cnt++;
+         
+     }
+        return cnt;
+    }
+    
+    
+    ListNode* reverseKGroup(ListNode* head, int k) {
+    
+        int len = lambai(head);
+        //base case ya toh head == NULL ho ya toh length of linked list kam
+        // mere k se toh list ko as it is return kardenge
+        
+        if(head==NULL || len<k){
+            return head;
+        }
+        
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        ListNode* forward = NULL;
+        int count = 0;
+        while(curr!=NULL&& count<k ){
+            
+            forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
+            count++;
+            
+        }
+        
+        if(forward!=NULL){
+        head->next = reverseKGroup(forward, k);
+        }
+      return prev;
+    }
