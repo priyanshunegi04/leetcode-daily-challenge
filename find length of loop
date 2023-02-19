@@ -1,0 +1,49 @@
+//Function to find the length of a loop in the linked list.
+struct Node* detect(struct Node *head){
+    
+if(head==NULL && head->next==NULL){
+    return NULL;
+}
+
+struct Node* slow = head;    
+struct Node * fast = head;
+
+while(fast!=NULL && slow!=NULL&&fast->next!=NULL){
+    fast = fast->next->next;
+    slow = slow->next;
+    
+    if(slow==fast)return slow;
+}
+return NULL;
+}
+
+struct Node* start(struct Node* head){
+if(head==NULL)return NULL;    
+    
+struct Node* intersection = detect(head);
+if(intersection==NULL)return NULL;
+
+struct Node* slow = head;
+while(slow!=intersection){
+    slow= slow->next;
+    intersection= intersection->next;
+}
+    return slow;
+}
+
+
+int countNodesinLoop(struct Node *head)
+{
+if(head==NULL || head->next==NULL)return 0;
+
+
+struct Node* startOfloop = start(head);
+if(startOfloop==NULL)return 0;
+
+struct Node* temp = startOfloop;
+int count = 1;
+while(temp->next!=startOfloop){
+    temp = temp->next;
+    count++;
+}
+return count;
