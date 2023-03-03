@@ -1,0 +1,82 @@
+class Solution{
+
+	public:
+	int findK(vector<vector<int>> &a, int n, int m, int k)
+    {
+      int cnt = 0;    
+      int total = n*m;        
+        
+        int startrow = 0;
+        int startcol = 0;
+        int endrow = n-1;
+        int endcol = m-1;
+        
+    while(cnt<total){
+        
+        for(int i = startcol; i<=endcol&& cnt<total; i++){
+            cnt++;
+            if(cnt==k){
+                return a[startrow][i];
+            }
+        }
+        startrow++;
+        
+          for(int i = startrow; i<=endrow&& cnt<total; i++){
+            cnt++;
+              if(cnt==k){
+                return a[i][endcol];
+            }
+        }
+        endcol--;
+        
+        for(int i = endcol; i>=startcol&& cnt<total; i--){
+            cnt++;
+              if(cnt==k){
+                return a[endrow][i];
+            }
+        }
+        endrow--;
+        
+       for(int i = endrow; i>= startrow&& cnt<total; i--){
+            cnt++;
+              if(cnt==k){
+                return a[i][startcol];
+            }
+        }
+        startcol++;
+    }   
+    }
+
+};
+
+//{ Driver Code Starts.
+
+int main()
+{
+    int T;
+    cin>>T;
+  
+    while(T--)
+    {
+        int n,m;
+        int k=0;
+        //cin>>k;
+        cin>>n>>m>>k;
+        vector<vector<int>> a(n, vector<int>(m, 0));
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                cin>>a[i][j];
+            }
+        }
+
+        Solution obj;
+
+        cout<< obj.findK(a, n, m, k) << "\n";
+        
+       
+    }
+}
+// } Driver Code Ends
