@@ -1,0 +1,6 @@
+    int poorPigs(int buck, int Die, int Test) {
+        int trials =  minutesToTest / minutesToDie ;
+        return ceil(log(buckets) / log(trials + 1));
+            
+    }
+    
