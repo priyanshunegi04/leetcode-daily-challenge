@@ -1,0 +1,35 @@
+    unordered_map<char, string>m;
+    unordered_map<string, int>dict;
+    
+    Encrypter(vector<char>& keys, vector<string>& values, vector<string>& dictionary) {
+   //key--->value ki mapping kro
+     int n = keys.size();   
+     for(int i=0; i<n; i++){
+         m[keys[i]] = values[i];
+     }   
+     //dictionary ke words  ko encrypt krkr unn encrypted words ki frequency store kro..   
+     n = dictionary.size();  
+     for(int i=0; i<n; i++){
+        dict[encrypt(dictionary[i])]++; 
+     }   
+    }
+    
+    string encrypt(string word1) {
+    //map ki help de word1 ko encrypt kro
+    int n = word1.size();  
+      string ans = "";  
+        for(int i=0; i<n; i++){
+            if(m.find(word1[i]) == m.end())return "";
+            else{
+                ans += m[word1[i]];
+            }
+        }
+        return ans;
+    }
+    
+    int decrypt(string word2) {
+   //map ke through word ko decrypt kro
+        if(dict.find(word2) == dict.end())return 0;
+        return dict[word2];
+    }
+};
