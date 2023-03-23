@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+     int size = nums.size();   
+      int firsthalf[n];
+      int secondhalf[n];  
+      
+      int firstcnt = 0, secondcnt = 0;
+     for(int i=0; i<n; i++){
+       firsthalf[firstcnt++] = nums[i];
+      }
+     for(int i=n; i<size; i++){
+      secondhalf[secondcnt++] = nums[i];
+     }
+      
+      int i = 0, j=0, k= 0;
+        
+       while(i<firstcnt && j<secondcnt){
+           nums[k++] = firsthalf[i++];
+           nums[k++] = secondhalf[j++];
+       } 
+        
+        while(i<firstcnt){
+         nums[k++] = firsthalf[i++];
+        }
+        
+    while(j<secondcnt){
+    nums[k++] = secondhalf[j++];
+     }
+     return nums;   
+    }
+};
