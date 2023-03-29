@@ -1,0 +1,78 @@
+class Solution {
+public:
+      vector<int>nextSmallerElement(vector<int>& heights, int n){
+    vector<int>ans(n);    
+    stack<int>s;    
+    s.push(-1);    
+        
+      for(int i=n-1; i>=0; i--){
+          int curr = i;
+          while(s.top()!=-1 && heights[s.top()] >= heights[curr]){
+              s.pop();
+          }
+          ans[i] = s.top();
+          s.push(i);
+      }
+     return ans;
+    }
+    
+    vector<int>prevSmallerElement(vector<int>& heights, int n){      
+    vector<int>ans(n);    
+    stack<int>s;    
+    s.push(-1);    
+        
+      for(int i=0; i<n; i++){
+          int curr = i;
+          while(s.top()!=-1 && heights[s.top()] >= heights[curr]){
+              s.pop();
+          }
+          ans[i] = s.top();
+          s.push(i);
+      }
+     return ans;
+  }
+    
+    int largestRectangleArea(vector<int>& heights) {
+        
+        int n = heights.size();
+        vector<int>next(n);
+        next = nextSmallerElement(heights, n);
+        
+        vector<int>prev(n);
+        prev = prevSmallerElement(heights, n);
+        
+        int area = -1e9;
+        for(int i=0; i<n; i++){
+            int length = heights[i];
+            //to handle duplicate cases
+            if(next[i] == -1){
+                next[i] = n;
+            }
+            
+            int breadth = next[i] - prev[i] - 1;
+            
+            int newAns = length * breadth;
+            area = max(area, newAns);
+        }
+    return area;
+    }
+
+    int maximalRectangle(vector<vector<char>>& matrix) {
+   
+      int n = matrix.size();     
+      int m = matrix[0].size();  
+      vector<int>heights(m, 0);  
+        
+        int maxArea = -1e9;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                
+             if(matrix[i][j] == '1') heights[j]++;
+             else heights[j] = 0;   
+            }                
+           int area = largestRectangleArea(heights);
+           maxArea = max(area, maxArea);     
+        }
+        return maxArea;        
+    }
+};
