@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string largestMultipleOfThree(vector<int>& digits) {
+   int sum = 0, dis[10] = {};
+   int m1[] = {1,4,7,2,5,8};
+   int m2[] = {2,5,8,1,4,7};
+        
+        string res= "";
+        for(auto d:digits){
+          sum+=d;
+          dis[d]++;
+        }   
+        
+        while(sum%3!=0){
+            for(auto it:sum%3==1?m1:m2){
+                if(dis[it]){
+                    dis[it]--;
+                    sum = sum -it;
+                    break;
+                }
+            }
+        }
+        
+       for(int i=9; i>=0; i--){
+           res = res + string(dis[i], '0' + i);
+       } 
+        return res.size()&&res[0]=='0'?"0":res;
+    }
+};
